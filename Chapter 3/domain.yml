@@ -1,0 +1,32 @@
+version: "2.0"
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+  - greet
+  - goodbye
+  - query_time
+  - query_date
+  - query_weekday
+
+entities:
+  - date
+
+slots:
+  date:
+    type: any
+
+responses:
+  utter_greet:
+    - text: Hello, I'm silly. I can check the time, date and day of the week for you. You can ask me. "What time is it now?", "What day is today?" or "What day is tomorrow?"
+
+  utter_goodbye:
+    - text: Goodbye!
+
+actions:
+  - action_query_time
+  - action_query_date
+  - action_query_weekday
+  - utter_goodye
+  - utter_greet
