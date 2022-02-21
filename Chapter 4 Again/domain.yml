@@ -1,11 +1,9 @@
-version: "3.0"
-session_config: 
+session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
 intents:
-  - greet
   - goodbye
+  - greet
   - weather
   - info_date
   - info_address
@@ -25,20 +23,20 @@ slots:
     type: any
 responses:
   utter_greet:
-    - text: "Hello, please tell us where and when we need to provide weather forecast services"
+    - text: Hello, please tell us where and when we need to provide weather forecast services
   utter_goodbye:
-    - text: "Goodbye!"
+    - text: Goodbye!
   utter_ask_address:
-    - text: "Where?"
+    - text: Where?
   utter_ask_date-time:
-    - text: "When?"
+    - text: When?
   utter_default:
-    - text: "Sorry, the system does not understand what you are saying" 
+    - text: Sorry, The system does not understand what you are saying
 actions:
-  - utter_greet
-  - utter_goodbye
   - utter_ask_address
   - utter_ask_date-time
+  - utter_goodbye
+  - utter_greet
   - utter_default
   - action_weather_form_submit
 forms:
@@ -46,6 +44,6 @@ forms:
     address:
       - entity: address
         type: from_entity
-    date_time:
+    date-time:
       - entity: date-time
         type: from_entity

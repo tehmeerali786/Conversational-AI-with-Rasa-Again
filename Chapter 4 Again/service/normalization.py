@@ -3,7 +3,7 @@ from typing import Optional, Tuple
 
 from pyowm.owm import OWM
 
-reg = OWM("not-actually-used-key").city_id_registry()
+reg = OWM("Key").city_id_registry()
 
 def text_to_coordinate(text_city: str) -> Tuple[float, float]:
     """parse city name to coordinate

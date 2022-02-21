@@ -5,12 +5,12 @@ from typing import Dict, Optional
 from requests import ConnectionError, HTTPError, Timeout, TooManyRedirects
 
 # API Key
-owm_api_key = os.getenv("OWN_KEY", "")
-assert owm_api_key 
+# owm_api_key = os.getenv("OWM_KEY", "")
+# assert owm_api_key 
 
-from pyowm.owm import (OWM)
+from pyowm.owm import OWM
 
-owm = OWM(owm_api_key)
+owm = OWM("Key")
 mgr = owm.weather_manager()
 
 one_day_timedelta = datetime.timedelta(days=1)

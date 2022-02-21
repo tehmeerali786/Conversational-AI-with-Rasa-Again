@@ -46,7 +46,7 @@ class ActionWeatherFormSubmit(Action):
             msg = "Not support weather query for {}".format([city, date_text])
             dispatch.utter_message(msg)
         else:
-            dispatch.utter_message(template="utter_working_on_it")
+            dispatch.utter_message(response="utter_working_on_it")
             try:
                 lat, lon = text_to_coordinate(city)
                 weather_data = get_text_weather_date(lat, lon, date_object, date_text, city)
