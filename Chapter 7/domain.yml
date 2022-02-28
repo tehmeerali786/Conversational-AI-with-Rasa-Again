@@ -1,34 +1,90 @@
 version: "2.0"
 
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
 intents:
   - greet
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  - book_ticket:
+      use_entities: [ ]
+  - book_drinks
+  - info_city
+  - info_date
+
+entities:
+  - city:
+      roles: 
+        - departure
+        - destination
+  - date
+  - ingredients:
+      groups:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+
+  - size:
+      groups:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+
+  - drinks:
+      groups:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+
+slots:
+  api_succeed:
+    type: bool
+  city_arrive:
+    type: text
+    influence_conversation: false 
+  city_depart:
+    type: text
+    influence_conversation: false 
+  date:
+    type: text
+    influence_conversation: false
+
+
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
+    - text: Hey! Welcome to Silly Booking System.
   utter_goodbye:
-  - text: "Bye"
+    - text: Goodbye
+  utter_ask_city_depart:
+    - text: Where do you start?
+  utter_ask_city_arrive:
+    - text: Where to go?
+  utter_ask_dete:
+    - text: When to set off?
+  utter_ask_confirm:
+    - text: Are you sure you want to buy a ticket from {city_depart} to {city_arrive} on {date}?
+  utter_ask_confirm_then_no:
+    - text: Ok!
+  utter_ask_confirm_then_yes:
+    - text: Okay, tickets are being purchased for you!
+  utter_api_succeed_true:
+    - text: The booking is successful
+  utter_api_succeed_false:
+    - text: An exception occured in the ticket purchase API and the purchased failed. Please try again later! 
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+actions:
+  - action_drink_response
+  - action_ticket_response
