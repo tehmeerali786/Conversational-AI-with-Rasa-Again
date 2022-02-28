@@ -148,3 +148,46 @@ class Neo4jKnowledgeBase(KnowledgeBase):
 
             for sub_query in sub_queries[1:]:
                 where_clause = "WHERE EXISTS {" + sub_query  + " " + where_clause + "}"
+
+            query = (
+                basic_query + " " + where_clause + " RETURN o LIMIT {}".format(limit)
+            )
+
+            print(query)
+            result = tx.run(query,)
+
+            return [dict(record["o"].items()) for record in result]
+
+    @staticmethod
+    def _do_get_object(
+        tx,
+        object_type: Text,
+        object_identifier: Text,
+        key_attribute: Text,
+        representation_attribute: Text,
+        relation: Dict[Text, Text],
+    ):
+        print("<_do_get_object>: ", object_type, object_identifier, key_attribute, representation_attribute, relation)
+        #preprocess attribute value 
+        if object_identifier.isdigit():
+            object_identifier = int(object_identifier)
+        else:
+            object_identifier = '"{}"'.format(object_identifier)
+
+        # try match key first
+        query = "MATCH (o:{} {{{key}:{value}}}) RETURN o, ID(o)".format(
+            object_type=object_type, key=key_attribute, value=object_identifier
+        )
+        print(query)
+        result = tx.run(query,)
+        record = result.single()
+
+        if record:
+            attr_dict = dict(record[0].items())
+            oid = record[1]
+        else: 
+            # try to match representation attribute
+            query = "MATCH (o: {object_type} {{{key}: {value}}}" 
+
+
+        
