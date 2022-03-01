@@ -35,7 +35,7 @@ class TicketQueryAction(Action):
 
 class DrinkQueryAction(Action):
     def name(self) -> Text: 
-        return "action_ticket_response"
+        return "action_drink_response"
 
     def run(self, dispatch, tracker, domain):
         # Print out entities by group
