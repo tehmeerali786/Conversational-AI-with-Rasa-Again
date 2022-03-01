@@ -1,17 +1,17 @@
 version: "2.0"
 
 rules:
-  - rule: Submit form
-    condition: 
-      # Condition that form is active
-      - active_loop: ticket_form
-    steps:
-      - action: ticket_form
-      - active_form: null 
-      - slot_was_set: 
-          - requested_slot: null
-      # The action we want to run when the form is submitted
-      - action: action_ticket_form_submit
+  # - rule: Submit form
+  #   condition: 
+  #     # Condition that form is active
+  #     - active_loop: ticket_form
+  #   steps:
+  #     - action: ticket_form
+  #     - active_form: null 
+  #     - slot_was_set: 
+  #         - requested_slot: null
+  #     # The action we want to run when the form is submitted
+  #     - action: action_ticket_form_submit
 
   - rule: handle drink query
     steps:
